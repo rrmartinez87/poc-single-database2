@@ -34,7 +34,7 @@ steps {
 }
         stage('Clone repository') {
         steps {
-            git branch: 'master', credentialsId: 'Github', url: 'https://github.com/rrmartinez87/poc-single-database.git'
+            git branch: 'master', credentialsId: 'Github', url: 'https://github.com/rrmartinez87/poc-single-database2.git'
             }
         }
 	stage('Set Terraform path') {
