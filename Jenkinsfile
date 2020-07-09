@@ -7,7 +7,8 @@ pipeline {
              )
 	 string(name: "ARM_TENANT_ID", defaultValue: "c160a942-c869-429f-8a96-f8c8296d57db", description: "Azure Tenant ID")
 	 string(name: "QA_SUBSCRIPTION_ID", defaultValue: "a7b78be8-6f3c-4faf-a43d-285ac7e92a05", description: "Azure Spoke PR QA Subsctiption")
-	 choice(name: "SELECTED_SUBSCRIPTION", choices: ['QA','DEV','PROD'], description: "Select the Subscription and deploy in its own workspace")  
+	 choice(name: "SELECTED_SUBSCRIPTION", choices: ['QA','DEV','PROD'], description: "Select the Subscription and deploy in its own workspace")
+	 string(name: "NOTIFY", defaultValue: "rafael.martinez@globant.com", description: "Email address to notify about job results")   
 	    
     }
     agent any
