@@ -19,7 +19,7 @@ pipeline {
 		sh '''
 		az account clear
 		az login -u rafael.martinez@globant.com -p $Az_pass
-		az account set -s ${QA_SUBSCRIPTION_ID}
+		az account set -s \\\"${QA_SUBSCRIPTION_ID}\\\"
 		sh
 		'''
 		cleanWs()
