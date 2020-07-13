@@ -31,8 +31,8 @@ pipeline {
   stage('Az Account') {
 steps {
              pwsh '''
-             $password = ConvertTo-SecureString -String "4420528e-9168-41fa-96c2-b78c99aff30c" -AsPlainText -Force
-             $Credential = New-Object System.Management.Automation.PSCredential ('ea7672ef-f009-47fe-8b74-114a7d99b257', $password)
+             $password = ConvertTo-SecureString -String '$TF_VAR_client_secret' -AsPlainText -Force
+             $Credential = New-Object System.Management.Automation.PSCredential ('$TF_VAR_client_id', $password)
              Connect-AzAccount -Credential $Credential -Tenant ${ARM_TENANT_ID}  -ServicePrincipal -Subscription ${QA_SUBSCRIPTION_ID} 
 	     '''
          }
