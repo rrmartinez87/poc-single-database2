@@ -85,7 +85,7 @@ steps {
     stage('Email') {
     steps {
         script {
-            def mailRecipients = 'rafael.martinez.angel@gmail.com'
+            def mailRecipients = 'rafael.martinez@globant.com'
             def jobName = currentBuild.fullDisplayName
             emailext body: '''${SCRIPT, template="groovy-html.template"}''',
             mimeType: 'text/html',
