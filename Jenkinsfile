@@ -108,6 +108,45 @@ steps {
             '''
             }
         }
+	 post{
+        always{
+            node (jenkinsNode) {
+                    emailext (
+                        to: "${NOTIFY}",
+                        subject: "[${currentBuild.currentResult}] LATAM - PROD: SPOKE ${SELECTED_SUBSCRIPTION}",
+                        body: """
+                        <style>
+                        thead {color:green;}
+                        tbody {color:black;}
+
+                        table, th, td {
+                          border: 1px solid black;
+                        }
+                        </style>
+
+                        <br>
+                        <h1>Build Info</h1>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Build Status</th>
+                                <th>Build URL</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>${currentBuild.currentResult}</td>
+                                <td>${BUILD_URL}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p><b>Note:</b> Please see attached log for detailed build status.</p>
+                        """,
+                        attachLog: true
+                    )
+            }
+        }
+    }
         stage('Clean WorkSpace') {
             steps {
                 echo "Wiping workspace $pwd"
