@@ -82,16 +82,19 @@ steps {
             }
 	
         }
-	        stage('Send email') {
-    def mailRecipients = "${NOTIFY}"
-    def jobName = currentBuild.fullDisplayName
-
-    emailext body: '''${SCRIPT, template="groovy-html.template"}''',
-        mimeType: 'text/html',
-        subject: "[Jenkins] ${jobName}",
-        to: "${mailRecipients}",
-        replyTo: "${mailRecipients}",
-        recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+    stage('Email') {
+    steps {
+        script {
+            def mailRecipients = 'rafael.martinez@globant.com'
+            def jobName = currentBuild.fullDisplayName
+            emailext body: '''${SCRIPT, template="groovy-html.template"}''',
+            mimeType: 'text/html',
+            subject: "[Jenkins] ${jobName}",
+            to: "${mailRecipients}",
+            replyTo: "${mailRecipients}",
+            recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+        }
+    }
 }
 		stage('Terraform Destroy') {
             when {
