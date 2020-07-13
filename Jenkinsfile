@@ -82,8 +82,7 @@ steps {
             }
 	post{
         always{
-            node (jenkinsNode) {
-                    emailext (
+            emailext (
                         to: "${NOTIFY}",
                         subject: "[${currentBuild.currentResult}] LATAM - PROD: SPOKE ${SELECTED_SUBSCRIPTION}",
                         body: """
@@ -117,8 +116,7 @@ steps {
                         attachLog: true
                     )
             }
-        }
-    }
+      }
 }
 		stage('Terraform Destroy') {
             when {
