@@ -89,21 +89,21 @@ pipeline {
         }
     }
 }
-		stage('Terraform Destroy') {
-            when {
-                expression { params.REQUESTED_ACTION == 'destroy' }
-            }
-	    options {
-                azureKeyVault(
-                    credentialID: 'jenkins-sp-sql2', 
-                    keyVaultURL: 'https://sqlsdtfstatekv-test-01.vault.azure.net/', 
-                    secrets: [
-                        [envVariable: 'TF_VAR_client_id', name: 'spn-id', secretType: 'Secret'],
-                        [envVariable: 'TF_VAR_client_secret', name: 'spn-secret', secretType: 'Secret'],
-                        [envVariable: 'StorageAccountAccessKey', name: 'storagekey', secretType: 'Secret']
-                    ]
-                )
-            }		
+     stage('Terraform Destroy') {
+         when {
+          expression { params.REQUESTED_ACTION == 'destroy' }
+              }
+	 options {
+             azureKeyVault(
+             credentialID: 'jenkins-sp-sql2', 
+             keyVaultURL: 'https://sqlsdtfstatekv-test-01.vault.azure.net/', 
+             secrets: [
+             [envVariable: 'TF_VAR_client_id', name: 'spn-id', secretType: 'Secret'],
+             [envVariable: 'TF_VAR_client_secret', name: 'spn-secret', secretType: 'Secret'],
+             [envVariable: 'StorageAccountAccessKey', name: 'storagekey', secretType: 'Secret']
+                     ]
+                        )
+                 }		
             steps {
             sh '''
             export TF_VAR_client_id=$TF_VAR_client_id
@@ -120,8 +120,7 @@ pipeline {
             steps {
                 echo "Wiping workspace $pwd"
                 cleanWs() 
-            }
-        }
-	
-    }
+                }
+           }
+      }
 }
